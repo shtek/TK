@@ -8,7 +8,9 @@ public class ItemsCounter {
     public int getCounter() {
         return counter;
     }
-
+    public void increment(){
+        counter++;
+    }
     public void setCounter(int counter) {
         this.counter = counter;
     }
