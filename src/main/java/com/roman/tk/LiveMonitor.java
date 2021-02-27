@@ -11,7 +11,7 @@ public class LiveMonitor {
     public String liveness() {
         LocalDateTime localDateTime = LocalDateTime.now();
         LocalTime localTime = localDateTime.toLocalTime();
-        return "The site is up and time is " + localTime.toString();
+        return "The site is up and time is " + localTime.toString() + "version 2";
     }
 }
 

@@ -80,6 +80,7 @@ public class WorkerBean {
             //handle the case of the first run
             if (itemsCounter.getCounter() == 0) {
                 persistLayer.addProducts(brandedItems);
+                log.debug("First case handled");
                 itemsCounter.increment();
             } else if (persistLayer.addProducts(brandedItems))
                 emailService.sendSimpleMessage();
