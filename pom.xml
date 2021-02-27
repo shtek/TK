@@ -72,11 +72,15 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-				<plugin>
-					<groupId>com.google.cloud.tools</groupId>
-					<artifactId>appengine-maven-plugin</artifactId>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
 
-				</plugin>
+				<configuration>
+					<projectId>GCLOUD_CONFIG</projectId>
+					<version>tk</version>
+				</configuration>
+			</plugin>
 				<plugin>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-maven-plugin</artifactId>
