@@ -68,21 +68,22 @@ public class WorkerBean {
  */
     public void checkForNewArrivals() {
         List<String> brands = loadResourceConfig.getBrands();
-        String productListJSON = romanStringUtils.extractJspResponse(tkClient.fetchRawData());
-        String json = getCLeanJSON(productListJSON);
+        String xml = tkClient.fetchRawData();
+        if (xml != null) {
+            String productListJSON = romanStringUtils.extractJspResponse(xml);
+            String json = getCLeanJSON(productListJSON);
 
-        List<ProductItem> productItems = convertJsonToObject.jsonToObject(json);
-        List<ProductItem> brandedItems =  brandedItems(productItems,brands);
-        brandedItems.stream().forEach(i->System.out.println(i));
-        System.out.println("--------"+ brandedItems.size());
-        //handle the case of the first run
-        if (itemsCounter.getCounter() ==0 ) {
-            persistLayer.addProducts(brandedItems);
-            itemsCounter.increment();
+            List<ProductItem> productItems = convertJsonToObject.jsonToObject(json);
+            List<ProductItem> brandedItems = brandedItems(productItems, brands);
+            brandedItems.stream().forEach(i -> log.info(i.toString()));
+            log.info("--------" + brandedItems.size());
+            //handle the case of the first run
+            if (itemsCounter.getCounter() == 0) {
+                persistLayer.addProducts(brandedItems);
+                itemsCounter.increment();
+            } else if (persistLayer.addProducts(brandedItems))
+                emailService.sendSimpleMessage();
         }
-        else
-           if(persistLayer.addProducts(brandedItems))
-              emailService.sendSimpleMessage();
 
 
         //          log.debug("Managed to extract " + productItems.size());

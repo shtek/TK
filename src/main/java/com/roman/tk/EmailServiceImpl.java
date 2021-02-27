@@ -27,6 +27,6 @@ public class EmailServiceImpl implements EmailService {
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
-        log.debug("Email is sent");
+        log.info("Email is sent");
     }
 }

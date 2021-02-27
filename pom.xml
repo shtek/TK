@@ -63,6 +63,11 @@
 			<artifactId>htmlunit</artifactId>
 
 		</dependency>
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-logging-logback</artifactId>
+			<version>0.120.1-alpha</version>
+		</dependency>
 	</dependencies>
 
 	<build>

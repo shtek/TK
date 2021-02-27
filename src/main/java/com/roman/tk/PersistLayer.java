@@ -22,7 +22,7 @@ public class PersistLayer {
     public  boolean addProducts(List<ProductItem> products)
     {
         boolean result = this.products.addAll(products);
-        log.debug("added to the storage " + result);
+        log.info("added to the storage " + result);
         return result;
     }
 
