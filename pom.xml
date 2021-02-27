@@ -84,6 +84,7 @@
 				<configuration>
 					<projectId>GCLOUD_CONFIG</projectId>
 					<version>tk</version>
+					<deploy.stopPreviousVersion>true</deploy.stopPreviousVersion>
 				</configuration>
 			</plugin>
 				<plugin>
