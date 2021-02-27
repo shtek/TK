@@ -12,9 +12,6 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 # [START gae_flex_quickstart_yaml]
-runtime: java
+runtime: java11
 
-handlers:
-- url: /.*
-  script: this field is required, but ignored
 # [END gae_flex_quickstart_yaml]
