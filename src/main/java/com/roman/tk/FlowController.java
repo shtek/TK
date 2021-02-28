@@ -11,15 +11,15 @@ import java.time.LocalTime;
 
 @RestController
 public class FlowController {
-  //  @Autowired
-  //  WorkerBean workerBean;
+    @Autowired
+    WorkerBean workerBean;
     @RequestMapping("/checkFlow")
     public ResponseEntity<String> liveness() {
         LocalDateTime localDateTime = LocalDateTime.now();
         LocalTime localTime = localDateTime.toLocalTime();
         return new ResponseEntity<>("current time "
             //    + localTime + localTime + "</br>" + workerBean.checkForNewArrivals(),
-                + localTime + localTime + "inside check flow" +"</br>" ,
+                + localTime + localTime + "inside check flow 2" +"</br>" ,
                 HttpStatus.OK);
 
     }
