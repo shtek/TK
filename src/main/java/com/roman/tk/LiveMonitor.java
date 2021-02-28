@@ -7,11 +7,13 @@ import java.time.LocalTime;
 
 @RestController
 public class LiveMonitor {
-    @RequestMapping("/")
-    public String liveness() {
+
+
+    @RequestMapping("/alive")
+    public String liveness2() {
         LocalDateTime localDateTime = LocalDateTime.now();
         LocalTime localTime = localDateTime.toLocalTime();
-        return "The site is up and time is " + localTime.toString() + "version 2";
+        return "The site is up and time is " + localTime.toString() + "version 22";
     }
 }
 
