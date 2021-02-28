@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<Configuration>
+
     <appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
 
     </appender>
@@ -14,7 +15,6 @@
         </layout>
     </appender>
 
-    <!-- LOG everything at INFO level -->
     <root level="info">
 
         <appender-ref ref="CLOUD" />
@@ -22,11 +22,10 @@
 
     </root>
 
-    <!-- LOG "com.roman.tk*" at TRACE level -->
     <logger name="com.roman.tk" level="trace" additivity="false">
         <appender-ref ref="CLOUD" />
         <appender-ref ref="Console" />
 
     </logger>
 
-</configuration>
+</Configuration>

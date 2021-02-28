@@ -66,17 +66,44 @@ public class WorkerBean {
   3. Add items to storage
   4. if any new items were added to storage then alert
  */
-    public void checkForNewArrivals() {
+    public synchronized String checkForNewArrivals() {
         List<String> brands = loadResourceConfig.getBrands();
         String xml = tkClient.fetchRawData();
+        //
+        StringBuilder response =  new StringBuilder("This is response from chekForNewArrivals");
+        response.append(System.getProperty("line.separator"));
+        response.append("</br>");
+        response.append("Brands that we are interested in are:");
+        response.append(System.getProperty("line.separator"));
+        response.append("</br>");
+        brands.stream().forEach(i->{response.append(i);
+        response.append("  ");});
+        response.append("<-");
+        response.append(System.getProperty("line.separator"));
+        response.append("</br>");
+        response.append("Received XML-->");
+        response.append(xml.substring(0,20));
+        response.append(System.getProperty("line.separator"));
+        response.append("</br>");
+
         if (xml != null) {
             String productListJSON = romanStringUtils.extractJspResponse(xml);
             String json = getCLeanJSON(productListJSON);
 
             List<ProductItem> productItems = convertJsonToObject.jsonToObject(json);
+            response.append("received in total ->");
+            response.append(productItems.size());
+            response.append("items") ;
+        response.append(System.getProperty("line.separator"));
+            response.append("</br>");
+
             List<ProductItem> brandedItems = brandedItems(productItems, brands);
-            brandedItems.stream().forEach(i -> log.info(i.toString()));
+            response.append("Received Branded items-->");
+
+            brandedItems.stream().forEach(i -> {log.info(i.toString()); response.append(i); });
             log.info("--------" + brandedItems.size());
+            response.append(brandedItems.size());
+
             //handle the case of the first run
             if (itemsCounter.getCounter() == 0) {
                 persistLayer.addProducts(brandedItems);
@@ -86,6 +113,9 @@ public class WorkerBean {
                 emailService.sendSimpleMessage();
         }
 
+
+
+        return  response.toString();
 
         //          log.debug("Managed to extract " + productItems.size());
        //          log.debug("These are brands->");
