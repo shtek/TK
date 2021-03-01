@@ -66,7 +66,7 @@ public class WorkerBean {
   3. Add items to storage
   4. if any new items were added to storage then alert
  */
-    public synchronized String checkForNewArrivals() {
+    public synchronized void checkForNewArrivals() {
         List<String> brands = loadResourceConfig.getBrands();
         String xml = tkClient.fetchRawData();
         //
@@ -115,7 +115,6 @@ public class WorkerBean {
 
 
 
-        return  response.toString();
 
         //          log.debug("Managed to extract " + productItems.size());
        //          log.debug("These are brands->");
@@ -159,6 +158,27 @@ public class WorkerBean {
 
 
     }
+    public String monitor(){
+        List<String> brands = loadResourceConfig.getBrands();
+
+        StringBuilder response =  new StringBuilder("This is response from chekForNewArrivals");
+        response.append(System.getProperty("line.separator"));
+         response.append("</br>");
+        response.append(System.getProperty("line.separator"));
+        response.append("</br>");
+        response.append("Brands that we are interested in are:");
+        response.append(System.getProperty("line.separator"));
+        response.append("</br>");
+        brands.stream().forEach(i->{response.append(i);
+            response.append("  ");});
+        response.append("<-");
+        response.append(System.getProperty("line.separator"));
+        response.append("</br>");
+
+        return  response.toString();
+
+}
+
 }
 /*
 public void checkForNewArrivals() {

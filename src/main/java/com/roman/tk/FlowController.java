@@ -18,8 +18,7 @@ public class FlowController {
         LocalDateTime localDateTime = LocalDateTime.now();
         LocalTime localTime = localDateTime.toLocalTime();
         return new ResponseEntity<>("current time "
-            //    + localTime + localTime + "</br>" + workerBean.checkForNewArrivals(),
-                + localTime + localTime + "inside check flow 2" +"</br>" ,
+              + localTime + localTime + "</br>" + workerBean.monitor(),
                 HttpStatus.OK);
 
     }
