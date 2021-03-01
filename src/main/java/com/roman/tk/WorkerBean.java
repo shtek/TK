@@ -161,7 +161,7 @@ public class WorkerBean {
     public String monitor(){
         List<String> brands = loadResourceConfig.getBrands();
 
-        StringBuilder response =  new StringBuilder("This is response from chekForNewArrivals");
+        StringBuilder response =  new StringBuilder("!This is response from chekForNewArrivals");
         response.append(System.getProperty("line.separator"));
          response.append("</br>");
         response.append(System.getProperty("line.separator"));
@@ -174,14 +174,20 @@ public class WorkerBean {
         response.append("<-");
         response.append(System.getProperty("line.separator"));
         response.append("</br>");
-        String xml = tkClient.fetchRawData();
-        response.append("xML->");
-        response.append(xml);
-        response.append(("<-"));
-        response.append(System.getProperty("line.separator"));
+       try {
+           String xml = tkClient.fetchRawData();
+           response.append("xML->");
+           response.append(xml);
+           response.append(("<-"));
+           response.append(System.getProperty("line.separator"));
 
-        response.append("</br>");
-
+           response.append("</br>");
+       }
+       catch (Exception e)
+       {
+           response.append("exception happned");
+           response.append(e);
+       }
 
         return  response.toString();
 
