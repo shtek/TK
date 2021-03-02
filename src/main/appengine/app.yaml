@@ -13,5 +13,6 @@
 #  limitations under the License.
 # [START gae_flex_quickstart_yaml]
 runtime: java11
+entrypoint: java -Xmx124m -jar TK-0.0.1-SNAPSHOT.jar
 
 # [END gae_flex_quickstart_yaml]
