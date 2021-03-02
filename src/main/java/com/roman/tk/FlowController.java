@@ -23,21 +23,21 @@ public class FlowController {
     public ResponseEntity<String> liveness() {
         LocalDateTime localDateTime = LocalDateTime.now();
         LocalTime localTime = localDateTime.toLocalTime();
-        Runtime runtime = Runtime.getRuntime();
+        // Get current size of heap in bytes
+        long heapSize = Runtime.getRuntime().totalMemory();
 
-        // Calculate the used memory
-        long memory = runtime.totalMemory() - runtime.freeMemory();
+// Get maximum size of heap in bytes. The heap cannot grow beyond this size.// Any attempt will result in an OutOfMemoryException.
+        long heapMaxSize = Runtime.getRuntime().maxMemory();
 
-      System.out.println("Used memory is megabytes: "
-               + bytesToMegabytes(memory)+
-               "free memoery " + bytesToMegabytes(runtime.freeMemory()));
+        // Get amount of free memory within the heap in bytes. This size will increase // after garbage collection and decrease as new objects are created.
+        long heapFreeSize = Runtime.getRuntime().freeMemory();;
 
 
         return new ResponseEntity<>("current time -->"
               + localTime + localTime + "</br>" + workerBean.monitor()
-                + "The site is up and time is " + bytesToMegabytes(runtime.totalMemory()) +
-                "total memory" + "Used memory is megabytes: "
-                + bytesToMegabytes(memory) + "free memoery " + bytesToMegabytes(runtime.freeMemory()),
+                + "The site is up and time is heapMaxSize" + bytesToMegabytes(heapMaxSize) +
+                "heapSize: "
+                + bytesToMegabytes(heapSize) + "free memoery " + bytesToMegabytes(heapFreeSize),
                 HttpStatus.OK);
 
     }
