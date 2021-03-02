@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.Flow;
 import java.util.stream.Collectors;
 
 @Service
@@ -176,7 +177,8 @@ public class WorkerBean {
         response.append("</br>");
        try {
              String xml = tkClient.fetchRawDataForTestPurposes();
-            response.append("xML->");
+
+           response.append("xML->");
            response.append(xml);
            response.append(("<-"));
            response.append(System.getProperty("line.separator"));
