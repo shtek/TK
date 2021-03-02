@@ -175,9 +175,9 @@ public class WorkerBean {
         response.append(System.getProperty("line.separator"));
         response.append("</br>");
        try {
-     //      String xml = tkClient.fetchRawData();
-     //      response.append("xML->");
-      //     response.append(xml);
+             String xml = tkClient.fetchRawDataForTestPurposes();
+            response.append("xML->");
+           response.append(xml);
            response.append(("<-"));
            response.append(System.getProperty("line.separator"));
 

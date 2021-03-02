@@ -33,4 +33,29 @@ public class TkClientWebClient {
             return null;
         }
     }
+    public   String fetchRawDataForTestPurposes() {
+        WebClient client = new WebClient();
+        client.getOptions().setCssEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
+        HtmlPage page = null;
+        String response;
+        try {
+            page = client.getPage(goldLableUrl);
+            response = page.toString();
+        }catch(Exception e){
+            log.error(e.toString());
+            e.printStackTrace();
+            response=e.toString();
+        }
+
+     //   if (page != null) {
+     //       return  page.asXml();
+     //   }
+     //   else
+    //    {
+    //        log.error("Page is null");
+    //        return null;
+     //   }
+        return response;
+    }
 }
