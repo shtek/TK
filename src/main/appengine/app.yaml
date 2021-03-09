@@ -12,7 +12,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 # [START gae_flex_quickstart_yaml]
-runtime: java11
+runtime: java8
 entrypoint: java -Xmx256m -jar TK-0.0.1-SNAPSHOT.jar
 
 # [END gae_flex_quickstart_yaml]
