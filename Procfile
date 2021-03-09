@@ -1,1 +1,1 @@
-web: java -cp target/classes:target/dependency/* com.roman.tk.TkApplication
+web: java -jar target/TK-0.0.1-SNAPSHOT.jar
