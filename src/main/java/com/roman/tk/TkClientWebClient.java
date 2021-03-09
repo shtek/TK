@@ -57,7 +57,8 @@ public class TkClientWebClient {
         try {
             con.setRequestMethod("GET");
             int status = con.getResponseCode();
-            response = Integer.toString(status);
+            String body = con.getResponseMessage();
+            response = Integer.toString(status) + body;
             
         } catch (ProtocolException e) {
             e.printStackTrace();
