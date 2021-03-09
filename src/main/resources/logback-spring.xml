@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
 
-    <appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
+    <!--appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
 
-    </appender>
+    </appender-->
 
 
     <appender name="Console"
@@ -17,13 +17,13 @@
 
     <root level="info">
 
-        <appender-ref ref="CLOUD" />
+        <!--appender-ref ref="CLOUD" /-->
         <appender-ref ref="Console" />
 
     </root>
 
     <logger name="com.roman.tk" level="trace" additivity="false">
-        <appender-ref ref="CLOUD" />
+        <!--appender-ref ref="CLOUD" /-->
         <appender-ref ref="Console" />
 
     </logger>
