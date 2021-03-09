@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.gargoylesoftware.htmlunit.WebClient;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -58,7 +60,15 @@ public class TkClientWebClient {
             con.setRequestMethod("GET");
             int status = con.getResponseCode();
             String body = con.getResponseMessage();
-            response = Integer.toString(status) + body;
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            response = Integer.toString(status) + body + content.toString();
             
         } catch (ProtocolException e) {
             e.printStackTrace();
