@@ -76,41 +76,16 @@ public class WorkerBean {
     public synchronized void checkForNewArrivals() {
         List<String> brands = loadResourceConfig.getBrands();
         String xml = tkClient.fetchRawData();
-        //
-        StringBuilder response =  new StringBuilder("This is response from chekForNewArrivals");
-        response.append(System.getProperty("line.separator"));
-        response.append("</br>");
-        response.append("Brands that we are interested in are:");
-        response.append(System.getProperty("line.separator"));
-        response.append("</br>");
-        brands.stream().forEach(i->{response.append(i);
-        response.append("  ");});
-        response.append("<-");
-        response.append(System.getProperty("line.separator"));
-        response.append("</br>");
-        response.append("Received XML-->");
-        response.append(xml.substring(0,20));
-        response.append(System.getProperty("line.separator"));
-        response.append("</br>");
 
         if (xml != null) {
             String productListJSON = romanStringUtils.extractJspResponse(xml);
-            System.out.println(productListJSON);
             String json = getCLeanJSON(productListJSON);
-
             List<ProductItem> productItems = convertJsonToObject.jsonToObject(json);
-            response.append("received in total ->");
-            response.append(productItems.size());
-            response.append("items") ;
-        response.append(System.getProperty("line.separator"));
-            response.append("</br>");
 
             List<ProductItem> brandedItems = brandedItems(productItems, brands);
-            response.append("Received Branded items-->");
 
-            brandedItems.stream().forEach(i -> {log.info(i.toString()); response.append(i); });
+            brandedItems.stream().forEach(i -> log.info(i.toString()));
             log.info("--------" + brandedItems.size());
-            response.append(brandedItems.size());
 
             //handle the case of the first run
             if (itemsCounter.getCounter() == 0) {
