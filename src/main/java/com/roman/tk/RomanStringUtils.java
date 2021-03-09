@@ -9,6 +9,10 @@ import java.io.IOException;
 
 @Service
 public class RomanStringUtils {
+
+private String romanStrip(String string){
+    return   string.replaceAll("^[ \t]+|[ \t]+$", "") ;
+}
 public String extractJspResponse(String string)
 {
     return StringUtils.substringBetween(string,"jsp-response=\"","\">");
@@ -19,7 +23,8 @@ public String extractItems(String string) {
 }
 public int totalNumberOfResult(String str){
     String numberOfResults = StringUtils.substringBetween(str, "totalNumberOfResults&quot;:", ",") ;
-    String numberOfresultsWihtoutSpaces = numberOfResults.strip();
+    String numberOfresultsWihtoutSpaces = romanStrip(numberOfResults);
+
     int iNumberOfResults =  Integer.parseInt(numberOfresultsWihtoutSpaces);
 
     return iNumberOfResults;
