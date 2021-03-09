@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.gargoylesoftware.htmlunit.WebClient;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 @Service
 public class TkClientWebClient {
     private static final Logger log = LoggerFactory.getLogger(TkClientWebClient.class);
@@ -34,6 +41,35 @@ public class TkClientWebClient {
         }
     }
     public   String fetchRawDataForTestPurposes() {
+        URL url = null;
+        String response = null;
+        try {
+            url = new URL(goldLableUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection con = null;
+        try {
+            con = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            con.setRequestMethod("GET");
+            int status = con.getResponseCode();
+            response = Integer.toString(status);
+            
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return response;
+    }
+    /*
+      public   String fetchRawDataForTestPurposes() {
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
@@ -48,14 +84,8 @@ public class TkClientWebClient {
             response=e.toString();
         }
 
-     //   if (page != null) {
-     //       return  page.asXml();
-     //   }
-     //   else
-    //    {
-    //        log.error("Page is null");
-    //        return null;
-     //   }
+
         return response;
     }
+     */
 }
