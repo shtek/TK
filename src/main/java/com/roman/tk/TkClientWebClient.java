@@ -21,7 +21,7 @@ public class TkClientWebClient {
     private static final Logger log = LoggerFactory.getLogger(TkClientWebClient.class);
     @Value( "${goldLableUrl}" )
     private String goldLableUrl;
-    public   String fetchRawData() {
+    public   String oldfetchRawData() {
        WebClient client = new WebClient();
        client.getOptions().setCssEnabled(false);
        client.getOptions().setJavaScriptEnabled(false);
@@ -42,7 +42,7 @@ public class TkClientWebClient {
             return null;
         }
     }
-    public   String fetchRawDataForTestPurposes() {
+    public   String fetchRawData() {
         URL url = null;
         String response = null;
         try {
@@ -58,8 +58,7 @@ public class TkClientWebClient {
         }
         try {
             con.setRequestMethod("GET");
-            int status = con.getResponseCode();
-            String body = con.getResponseMessage();
+
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -68,7 +67,44 @@ public class TkClientWebClient {
                 content.append(inputLine);
             }
             in.close();
-            response = Integer.toString(status) + body + content.toString();
+            response =  content.toString();
+
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return response;
+
+    }
+        public   String fetchRawDataForTestPurposes() {
+        URL url = null;
+        String response = null;
+        try {
+            url = new URL(goldLableUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection con = null;
+        try {
+            con = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            con.setRequestMethod("GET");
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            response =  content.toString();
             
         } catch (ProtocolException e) {
             e.printStackTrace();

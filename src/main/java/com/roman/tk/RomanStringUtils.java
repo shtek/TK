@@ -15,11 +15,11 @@ private String romanStrip(String string){
 }
 public String extractJspResponse(String string)
 {
-    return StringUtils.substringBetween(string,"jsp-response=\"","\">");
-    // jsp-response=" ">
+    return StringUtils.substringBetween(string,"jsp-response=\'","\'>");
+    // jsp-response=' ">
 }
 public String extractItems(String string) {
-    return StringUtils.substringBetween(string, "results&quot;: [", "],");
+    return StringUtils.substringBetween(string, "results&#034;: [", "],");
 }
 public int totalNumberOfResult(String str){
     String numberOfResults = StringUtils.substringBetween(str, "totalNumberOfResults&quot;:", ",") ;

@@ -55,12 +55,18 @@ public class WorkerBean {
     public String getCLeanJSON (String productListJSON) {
         String productListCleanedUp = romanStringUtils.extractItems(productListJSON);
         //Convert quotes to "
-        String removedQuotes = productListCleanedUp.replaceAll("&quot;", "\"");
+        String removedQuotes = productListCleanedUp.replaceAll("&#034;", "\"");
         //Wrap with [] to make valid JSON
         String json = "[" + removedQuotes + "]";
         return json;
     }
+    public String wrapWithBrackets(String xml){
+        String removedQuotes = xml.replaceAll("&#034;", "\"");
 
+        //Wrap with [] to make valid JSON
+        String json = "[" + removedQuotes + "]";
+        return json;
+    }
   /*
   1. received new items
   2. filter out only branded items
@@ -89,6 +95,7 @@ public class WorkerBean {
 
         if (xml != null) {
             String productListJSON = romanStringUtils.extractJspResponse(xml);
+            System.out.println(productListJSON);
             String json = getCLeanJSON(productListJSON);
 
             List<ProductItem> productItems = convertJsonToObject.jsonToObject(json);
@@ -177,9 +184,28 @@ public class WorkerBean {
         response.append("</br>");
        try {
              String xml = tkClient.fetchRawDataForTestPurposes();
+           if (xml != null) {
+               String productListJSON = romanStringUtils.extractJspResponse(xml);
 
-           response.append("xML->");
-           response.append(xml);
+               String json = getCLeanJSON(productListJSON);
+               response.append(System.getProperty("line.separator"));
+               List<ProductItem> productItems = convertJsonToObject.jsonToObject(json);
+               response.append("received in total ->");
+               response.append(productItems.size());
+               response.append("items") ;
+               response.append(System.getProperty("line.separator"));
+               response.append("</br>");
+
+               //    List<ProductItem> productItems = convertJsonToObject.jsonToObject(json);
+           //    response.append("received in total ->");
+           //    response.append(productItems.size());
+          //     response.append("items") ;
+          //     response.append(System.getProperty("line.separator"));
+          //     response.append("</br>");
+
+           }
+
+
            response.append(("<-"));
            response.append(System.getProperty("line.separator"));
 
