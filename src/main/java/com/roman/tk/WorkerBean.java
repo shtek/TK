@@ -84,8 +84,8 @@ public class WorkerBean {
 
             List<ProductItem> brandedItems = brandedItems(productItems, brands);
 
-            brandedItems.stream().forEach(i -> System.out.println(i.toString()));
-            log.info("--------" + brandedItems.size());
+           // brandedItems.stream().forEach(i -> System.out.println(i.toString()));
+           // log.info("--------" + brandedItems.size());
             System.out.println("--------" + brandedItems.size());
 
             //handle the case of the first run
@@ -144,7 +144,7 @@ public class WorkerBean {
 
     }
     public  void checkAlive() {
-
+        System.out.print("---Wake up---");
         tkClient.checkAlive();
         System.out.print("Wake up");
     }
