@@ -84,13 +84,15 @@ public class WorkerBean {
 
             List<ProductItem> brandedItems = brandedItems(productItems, brands);
 
-            brandedItems.stream().forEach(i -> log.info(i.toString()));
+            brandedItems.stream().forEach(i -> System.out.println(i.toString()));
             log.info("--------" + brandedItems.size());
+            System.out.println("--------" + brandedItems.size());
 
             //handle the case of the first run
             if (itemsCounter.getCounter() == 0) {
                 persistLayer.addProducts(brandedItems);
                 log.debug("First case handled");
+                System.out.println("First case handled");
                 itemsCounter.increment();
             } else if (persistLayer.addProducts(brandedItems))
                 emailService.sendSimpleMessage();
@@ -141,9 +143,14 @@ public class WorkerBean {
 
 
     }
+    public  void checkAlive() {
+
+        tkClient.checkAlive();
+        System.out.print("Wake up");
+    }
     public String monitor(){
         List<String> brands = loadResourceConfig.getBrands();
-
+        System.out.println("--------inside the monitor");
         StringBuilder response =  new StringBuilder("!This is response from chekForNewArrivals");
         response.append(System.getProperty("line.separator"));
          response.append("</br>");

@@ -10,9 +10,14 @@ public class ScheduledTask {
     @Autowired
     WorkerBean workerBean;
        //every 5 seconds
-     @Scheduled(fixedRate = 5000)
+         @Scheduled(fixedRate = 5000)
         public void doWork() {
            workerBean.checkForNewArrivals();
         }
+    @Scheduled(fixedRate = 10000)
+    public void checkAlive() {
+        workerBean.checkAlive();
+    }
+
     }
 

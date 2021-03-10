@@ -21,6 +21,9 @@ public class TkClientWebClient {
     private static final Logger log = LoggerFactory.getLogger(TkClientWebClient.class);
     @Value( "${goldLableUrl}" )
     private String goldLableUrl;
+    @Value( "${herokuUrl}" )
+    private String herokuUrl;
+
     @Deprecated
     //using web client is not possible on the cloud, as it is
     // apparently too memory intensive . or perhaps
@@ -83,6 +86,7 @@ public class TkClientWebClient {
         return response;
 
     }
+
         public   String fetchRawDataForTestPurposes() {
         URL url = null;
         String response = null;
@@ -119,6 +123,36 @@ public class TkClientWebClient {
 
         return response;
     }
+    public   String checkAlive() {
+        URL url = null;
+        String response = null;
+        try {
+            url = new URL(herokuUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection con = null;
+        try {
+            con = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            con.setRequestMethod("GET");
+
+
+            response =  Integer.toString(con.getResponseCode());
+
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return response;
+    }
+
     /*
       public   String fetchRawDataForTestPurposes() {
         WebClient client = new WebClient();
