@@ -84,7 +84,7 @@ public class WorkerBean {
 
             List<ProductItem> brandedItems = brandedItems(productItems, brands);
 
-           // brandedItems.stream().forEach(i -> System.out.println(i.toString()));
+           brandedItems.stream().forEach(i -> System.out.println(i.toString()));
            // log.info("--------" + brandedItems.size());
             System.out.println("--------" + brandedItems.size());
 
