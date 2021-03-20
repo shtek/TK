@@ -14,10 +14,7 @@ public class ScheduledTask {
         public void doWork() {
            workerBean.checkForNewArrivals();
         }
-    @Scheduled(fixedRate = 6000)
-    public void checkAlive() {
-        workerBean.checkAlive();
-    }
+
 
     }
 

@@ -120,8 +120,8 @@
 				<artifactId>appengine-maven-plugin</artifactId>
 
 				<configuration>
-					<projectId>GCLOUD_CONFIG</projectId>
-					<version>tk</version>
+					<projectId>agent</projectId>
+					<version>1</version>
 					<deploy.stopPreviousVersion>true</deploy.stopPreviousVersion>
 				</configuration>
 			</plugin>

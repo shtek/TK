@@ -24,35 +24,12 @@ public class TkClientWebClient {
     @Value( "${herokuUrl}" )
     private String herokuUrl;
 
-    @Deprecated
-    //using web client is not possible on the cloud, as it is
-    // apparently too memory intensive . or perhaps
-    // the some redirections occure
-    public   String oldfetchRawData() {
-       WebClient client = new WebClient();
-       client.getOptions().setCssEnabled(false);
-       client.getOptions().setJavaScriptEnabled(false);
-        HtmlPage page = null;
-        try {
-             page = client.getPage(goldLableUrl);
-        }catch(Exception e){
-            log.error(e.toString());
-            e.printStackTrace();
-        }
 
-        if (page != null) {
-            return  page.asXml();
-        }
-        else
-        {
-            log.error("Page is null");
-            return null;
-        }
-    }
-    public   String fetchRawData() {
+    public   String fetchRawData(int i) {
         URL url = null;
         String response = null;
         try {
+            String urlString = goldLableUrl + i;
             url = new URL(goldLableUrl);
         } catch (MalformedURLException e) {
             e.printStackTrace();

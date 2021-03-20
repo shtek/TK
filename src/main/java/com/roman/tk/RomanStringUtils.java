@@ -22,6 +22,7 @@ public String extractItems(String string) {
     return StringUtils.substringBetween(string, "results&#034;: [", "],");
 }
 public int totalNumberOfResult(String str){
+
     String numberOfResults = StringUtils.substringBetween(str, "totalNumberOfResults&quot;:", ",") ;
     String numberOfresultsWihtoutSpaces = romanStrip(numberOfResults);
 
@@ -29,6 +30,16 @@ public int totalNumberOfResult(String str){
 
     return iNumberOfResults;
 
+}
+/*
+;numberOfPages&#034;: 5  },
+we need to extract 5
+ */
+public int totalNumberOfPages(String str){
+    String numberOfResults = StringUtils.substringBetween(str, "numberOfPages&#034;:", "}") ;
+    String numberOfresultsWihtoutSpaces = romanStrip(numberOfResults);
+    int iNumberOfResults =  Integer.parseInt(numberOfresultsWihtoutSpaces);
+    return iNumberOfResults;
 }
 
 }
