@@ -130,16 +130,16 @@ public class TkClientWebClient {
         return response;
     }
 
-    /*
-      public   String fetchRawDataForTestPurposes() {
+
+      public   String fetchRawDataViaWebClient(int i) {
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
         HtmlPage page = null;
         String response;
         try {
-            page = client.getPage(goldLableUrl);
-            response = page.toString();
+            page = client.getPage(goldLableUrl +i );
+            response = page.asXml();
         }catch(Exception e){
             log.error(e.toString());
             e.printStackTrace();
@@ -149,5 +149,5 @@ public class TkClientWebClient {
 
         return response;
     }
-     */
+
 }

@@ -13,14 +13,22 @@ public class RomanStringUtils {
 private String romanStrip(String string){
     return   string.replaceAll("^[ \t]+|[ \t]+$", "") ;
 }
-public String extractJspResponse(String string)
-{
-    return StringUtils.substringBetween(string,"jsp-response=\'","\'>");
-    // jsp-response=' ">
-}
-public String extractItems(String string) {
-    return StringUtils.substringBetween(string, "results&#034;: [", "],");
-}
+
+
+
+
+    public String extractJspResponse(String string)
+    {
+        return StringUtils.substringBetween(string,"jsp-response=\"","\">");
+        // jsp-response=" "> or single quote if using the simple URL java
+    }
+//public String extractItems(String string) {
+//    return StringUtils.substringBetween(string, "results&#034;: [", "],");
+//}
+
+    public String extractItems(String string) {
+        return StringUtils.substringBetween(string, "results&quot;: [", "],");
+    }
 public int totalNumberOfResult(String str){
 
     String numberOfResults = StringUtils.substringBetween(str, "totalNumberOfResults&quot;:", ",") ;

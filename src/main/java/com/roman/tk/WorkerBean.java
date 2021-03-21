@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,19 +82,30 @@ public class WorkerBean {
         List<String> brands = loadResourceConfig.getBrands();
         List<ProductItem> productItems = new ArrayList<>();
 
-              for (int it=0 ; it < 5 ; it++) {
-           String xml = tkClient.fetchRawData(it);
 
-           String productListJSON = romanStringUtils.extractJspResponse(xml);
-           String json = getCLeanJSON(productListJSON);
+        for(int pageNumber=0;pageNumber <=currentlyNewItems;pageNumber++) {
+
+            //     String xml = tkClient.fetchRawData(currentlyNewItems);
+            String xml = tkClient.fetchRawDataViaWebClient(pageNumber);
+
+            //  String productListJSON = romanStringUtils.extractJspResponse(xml);
+            //   String json = getCLeanJSON(productListJSON);
 
 
-            List<ProductItem> productItemsNew =  convertJsonToObject.jsonToObject(json);
+            //      List<ProductItem> productItems =  convertJsonToObject.jsonToObject(json);
+            String productListCleanedUp = romanStringUtils.extractItems(xml);
+            //Convert quotes to "
+            String removedQuotes = productListCleanedUp.replaceAll("&quot;", "\"");
+            //Wrap with [] to make valid JSON
+            String json = "[" + removedQuotes + "]";
+
+            List<ProductItem> productItemsNew = convertJsonToObject.jsonToObject(json);
             productItems.addAll(productItemsNew);
+        }
 
-       }
 
-            List<ProductItem> brandedItems = brandedItems(productItems, brands);
+
+        List<ProductItem> brandedItems = brandedItems(productItems, brands);
 
                 brandedItems.stream().forEach(i -> System.out.println(i.toString()));
                 // log.info("--------" + brandedItems.size());
