@@ -78,8 +78,9 @@ public class WorkerBean {
  */
     public synchronized void checkForNewArrivals() {
         String numberOfPage = tkClient.fetchRawData(0);
-        System.out.println("number of items-->" + numberOfPage);
+
         int currentlyNewPages = romanStringUtils.totalNumberOfPages(numberOfPage);
+        System.out.println("number of items-->" + currentlyNewPages);
         List<String> brands = loadResourceConfig.getBrands();
         List<ProductItem> productItems = new ArrayList<>();
 
