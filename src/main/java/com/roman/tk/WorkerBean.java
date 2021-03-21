@@ -77,13 +77,14 @@ public class WorkerBean {
   5. will do it for 6 times
  */
     public synchronized void checkForNewArrivals() {
-        String numberOfItems = tkClient.fetchRawData(0);
-        int currentlyNewItems = romanStringUtils.totalNumberOfPages(numberOfItems);
+        String numberOfPage = tkClient.fetchRawData(0);
+        System.out.println("number of items-->" + numberOfPage);
+        int currentlyNewPages = romanStringUtils.totalNumberOfPages(numberOfPage);
         List<String> brands = loadResourceConfig.getBrands();
         List<ProductItem> productItems = new ArrayList<>();
 
 
-        for(int pageNumber=0;pageNumber <=currentlyNewItems;pageNumber++) {
+        for(int pageNumber=0;pageNumber <=currentlyNewPages;pageNumber++) {
 
             //     String xml = tkClient.fetchRawData(currentlyNewItems);
             String xml = tkClient.fetchRawDataViaWebClient(pageNumber);
