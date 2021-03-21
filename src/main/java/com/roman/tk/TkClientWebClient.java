@@ -30,7 +30,7 @@ public class TkClientWebClient {
         String response = null;
         try {
             String urlString = goldLableUrl + i;
-            url = new URL(goldLableUrl);
+            url = new URL(urlString);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
