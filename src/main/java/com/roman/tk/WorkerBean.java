@@ -80,14 +80,12 @@ public class WorkerBean {
         String numberOfPage = tkClient.fetchRawData(0);
 
         int currentlyNewPages = romanStringUtils.totalNumberOfPages(numberOfPage);
-        System.out.println("number of items-->" + currentlyNewPages);
         List<String> brands = loadResourceConfig.getBrands();
         List<ProductItem> productItems = new ArrayList<>();
 
 
         for(int pageNumber=0;pageNumber <=currentlyNewPages;pageNumber++) {
-
-            //     String xml = tkClient.fetchRawData(currentlyNewItems);
+            System.out.println(pageNumber);
             String xml = tkClient.fetchRawDataViaWebClient(pageNumber);
 
             //  String productListJSON = romanStringUtils.extractJspResponse(xml);
