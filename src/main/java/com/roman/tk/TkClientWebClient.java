@@ -140,9 +140,9 @@ public class TkClientWebClient {
         HtmlPage page = null;
         String response;
         try {
-            System.out.println("---------");
+            System.out.println("---------" + goldLableUrl);
             page = client.getPage(goldLableUrl +i );
-            System.out.println(page);
+            System.out.println("---:::" + page);
             response = page.asXml();
         }catch(Exception e){
             log.error(e.toString());
