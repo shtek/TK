@@ -29,4 +29,13 @@ public class EmailServiceImpl implements EmailService {
         emailSender.send(message);
         log.info("Email is sent");
     }
+    public void sendDataMessage(String data) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreply@baeldung.com");
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text + data);
+        emailSender.send(message);
+        log.info("Email is sent");
+    }
 }

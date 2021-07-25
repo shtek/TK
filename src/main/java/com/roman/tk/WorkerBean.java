@@ -85,7 +85,6 @@ public class WorkerBean {
 
 
         for(int pageNumber=0;pageNumber <=currentlyNewPages;pageNumber++) {
-            System.out.println(pageNumber);
             String xml = tkClient.fetchRawDataViaWebClient(pageNumber);
 
             //  String productListJSON = romanStringUtils.extractJspResponse(xml);
@@ -117,9 +116,12 @@ public class WorkerBean {
                     log.debug("First case handled");
                     System.out.println("First case handled");
                     itemsCounter.increment();
-                } else if (persistLayer.addProducts(brandedItems))
-                    emailService.sendSimpleMessage();
-
+                } else if (persistLayer.addProducts(brandedItems)) {
+                    StringBuffer branded = new StringBuffer();
+                    brandedItems.stream().forEach(b->branded.append(b.getBrandName()));
+                  //  emailService.sendSimpleMessage(branded.toString());
+                    emailService.sendDataMessage(branded.toString());
+                }
     }
 
     public String monitor(){

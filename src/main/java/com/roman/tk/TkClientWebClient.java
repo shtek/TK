@@ -116,8 +116,6 @@ public class TkClientWebClient {
         }
         try {
             con.setRequestMethod("GET");
-
-
             response =  Integer.toString(con.getResponseCode());
 
         } catch (ProtocolException e) {
@@ -134,15 +132,13 @@ public class TkClientWebClient {
       public   String fetchRawDataViaWebClient(int i) {
 
         WebClient client = new WebClient();
-          System.out.println("----+++-----");
+
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
         HtmlPage page = null;
         String response;
         try {
-            System.out.println("---------" + goldLableUrl);
             page = client.getPage(goldLableUrl +i );
-            System.out.println("---:::" + page);
             response = page.asXml();
         }catch(Exception e){
             log.error(e.toString());
