@@ -80,11 +80,13 @@ public class WorkerBean {
         String numberOfPage = tkClient.fetchRawData(0);
 
         int currentlyNewPages = romanStringUtils.totalNumberOfPages(numberOfPage);
+       // System.out.println("number of pages" + currentlyNewPages);
         List<String> brands = loadResourceConfig.getBrands();
         List<ProductItem> productItems = new ArrayList<>();
 
 
         for(int pageNumber=0;pageNumber <=currentlyNewPages;pageNumber++) {
+          //  System.out.println(pageNumber);
             String xml = tkClient.fetchRawDataViaWebClient(pageNumber);
 
             //  String productListJSON = romanStringUtils.extractJspResponse(xml);
@@ -105,7 +107,7 @@ public class WorkerBean {
 
 
         List<ProductItem> brandedItems = brandedItems(productItems, brands);
-
+               System.out.println("----branded items");
                 brandedItems.stream().forEach(i -> System.out.println(i.toString()));
                 // log.info("--------" + brandedItems.size());
                 System.out.println("--------" + brandedItems.size());
@@ -117,10 +119,10 @@ public class WorkerBean {
                     System.out.println("First case handled");
                     itemsCounter.increment();
                 } else if (persistLayer.addProducts(brandedItems)) {
-                    StringBuffer branded = new StringBuffer();
-                    brandedItems.stream().forEach(b->branded.append(b.getBrandName()));
-                  //  emailService.sendSimpleMessage(branded.toString());
-                    emailService.sendDataMessage(branded.toString());
+//                    StringBuffer branded = new StringBuffer();
+//                    brandedItems.stream().forEach(b->branded.append(b.getBrandName()));
+                    emailService.sendSimpleMessage();
+            //        emailService.sendDataMessage(branded.toString());
                 }
     }
 
